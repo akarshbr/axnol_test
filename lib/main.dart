@@ -1,4 +1,5 @@
 import 'package:clean_code_demo/presentation/login_screen/view/login_screen.dart';
+import 'package:clean_code_demo/presentation/profile_screen/view/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,7 +1,9 @@
-import 'dart:developer';
-
+import 'package:clean_code_demo/presentation/profile_screen/view/profile_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+
+import '../../../widgets/button_widget.dart';
+import '../../../widgets/text_form_field_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -49,10 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: emailController,
                 decoration: InputDecoration(
                   filled: true,
-                  label: Row(
+                  label: const Row(
                     children: [
-                      Text("Email address", style: const TextStyle(color: Colors.grey)),
-                      Text("*", style: const TextStyle(color: Colors.red)),
+                      Text("Email address", style: TextStyle(color: Colors.grey)),
+                      Text("*", style: TextStyle(color: Colors.red)),
                     ],
                   ),
                   border: OutlineInputBorder(
@@ -67,44 +69,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: size.width * .05),
-            SizedBox(
-              width: size.width * .8,
-              child: TextFormField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  filled: true,
-                  label: Row(
-                    children: [
-                      Text("Password", style: const TextStyle(color: Colors.grey)),
-                      Text("*", style: const TextStyle(color: Colors.red)),
-                    ],
-                  ),
-                  suffixText: "Forgot?",
-                  suffixStyle: TextStyle(color: Colors.red),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(5)),
-                ),
-              ),
+            TextFormFieldWidget(
+              size: size,
+              passwordController: passwordController,
+              label: 'Password',
+              suffixText: "Forgot?",
             ),
             SizedBox(height: size.width * .08),
-            InkWell(
+            ButtonWidget(
+              size: size,
+              width: .8,
               onTap: () {
-                log("login");
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
               },
-              child: Container(
-                width: size.width * .8,
-                height: 55,
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: Center(
-                  child: Text(
-                    "sign in",
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+              text: 'Sign in',
             ),
             Spacer(),
             RichText(
