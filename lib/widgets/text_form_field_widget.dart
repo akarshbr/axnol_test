@@ -30,13 +30,13 @@ class TextFormFieldWidget extends StatelessWidget {
           label: Row(
             children: [
               Text(label, style: const TextStyle(color: Colors.grey)),
-              Text("*", style: const TextStyle(color: Colors.red)),
+              const Text("*", style: TextStyle(color: Colors.red)),
             ],
           ),
           suffixText: suffixText,
-          suffixStyle: TextStyle(color: Colors.red),
+          suffixStyle: const TextStyle(color: Colors.red),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(5)),
+              borderSide: const BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(5)),
         ),
       ),
     );

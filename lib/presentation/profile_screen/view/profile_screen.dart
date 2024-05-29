@@ -87,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               shape: BoxShape.circle,
                               image: image != null
                                   ? DecorationImage(image: FileImage(image!), fit: BoxFit.cover)
-                                  : DecorationImage(image: AssetImage("asset/dp.png"))),
+                                  : const DecorationImage(image: AssetImage("asset/dp.png"))),
                           alignment: Alignment.bottomRight,
                           child: InkWell(
                             onTap: () {
@@ -95,37 +95,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text("Choose the Source"),
+                                      title: const Text("Choose the Source"),
                                       actions: [
                                         ElevatedButton.icon(
                                             onPressed: () {
                                               getImage(ImageSource.camera);
                                               Navigator.pop(context);
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.camera,
-                                              color: const Color(0xffFF9900),
+                                              color: Color(0xffFF9900),
                                             ),
-                                            label: Text("Camera", style: TextStyle(color: Colors.black))),
+                                            label: const Text("Camera", style: TextStyle(color: Colors.black))),
                                         ElevatedButton.icon(
                                             onPressed: () {
                                               getImage(ImageSource.gallery);
                                               Navigator.pop(context);
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.photo,
-                                              color: const Color(0xffFF9900),
+                                              color: Color(0xffFF9900),
                                             ),
-                                            label: Text("Gallery", style: TextStyle(color: Colors.black)))
+                                            label: const Text("Gallery", style: TextStyle(color: Colors.black)))
                                       ],
                                     );
                                   });
                             },
-                            child: CircleAvatar(
+                            child: const CircleAvatar(
                               radius: 20,
-                              backgroundColor: const Color(0xffFF9900),
+                              backgroundColor: Color(0xffFF9900),
                               child: Center(
-                                child: const Icon(Icons.camera_alt_outlined, color: Colors.white),
+                                child: Icon(Icons.camera_alt_outlined, color: Colors.white),
                               ),
                             ),
                           ),

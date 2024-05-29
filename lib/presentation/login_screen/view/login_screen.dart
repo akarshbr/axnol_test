@@ -27,8 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: SizedBox()),
-            Row(
+            const Expanded(child: SizedBox()),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            Text(
+            const Text(
               "EDUCATION",
               style: TextStyle(fontFamily: "SuezOne", fontSize: 28, color: Colors.red),
             ),
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(5)),
+                      borderSide: const BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(5)),
                 ),
                 validator: (enteredEmail) {
                   if (EmailValidator.validate(enteredEmail!)) {
@@ -86,9 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               text: 'Sign in',
             ),
-            Spacer(),
+            const Spacer(),
             RichText(
-              text: TextSpan(children: [
+              text: const TextSpan(children: [
                 TextSpan(
                     text: "Not registered yet? ",
                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
