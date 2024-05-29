@@ -1,6 +1,7 @@
-import 'package:clean_code_demo/presentation/profile_screen/view/profile_screen.dart';
+import 'package:clean_code_demo/presentation/login_screen/controller/login_controller.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets/button_widget.dart';
 import '../../../widgets/text_form_field_widget.dart';
@@ -80,7 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
               size: size,
               width: .8,
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+                Provider.of<LoginController>(context, listen: false)
+                    .onLogin(emailController.text.trim(), passwordController.text.trim(), context);
               },
               text: 'Sign in',
             ),

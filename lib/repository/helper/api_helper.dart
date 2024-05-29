@@ -13,7 +13,7 @@ class ApiHelper {
     final url = Uri.parse(baseUrl);
     try {
       var response = await http.post(url, body: body);
-      log("Api Called -> status code=${response.statusCode}");
+      log("Api Called -> status code -> ${response.statusCode}");
       if (response.statusCode == 200) {
         var decodedData = jsonDecode(response.body);
         var data = {"status": 1, "data": decodedData};
