@@ -16,13 +16,12 @@ class LoginController extends ChangeNotifier {
     var body = {"email": "$email", "password": "$passWord"};
     LoginService.onLogin(body).then((value) {
       if (value["status"] == 1) {
-        var data = value["data"];
-        storeReceivedData(data);
+        storeReceivedData(value);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
         log("$value");
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Login Failed"), backgroundColor: Colors.red));
+            .showSnackBar( SnackBar(content: Text("${value["error"]}"), backgroundColor: Colors.red));
       }
       notifyListeners();
     });

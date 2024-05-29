@@ -9,17 +9,37 @@ LoginResponseModel loginResponseModelFromJson(String str) => LoginResponseModel.
 String loginResponseModelToJson(LoginResponseModel data) => json.encode(data.toJson());
 
 class LoginResponseModel {
+  int? status;
+  Data? data;
+
+  LoginResponseModel({
+    this.status,
+    this.data,
+  });
+
+  factory LoginResponseModel.fromJson(Map<String, dynamic> json) => LoginResponseModel(
+    status: json["status"],
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "data": data?.toJson(),
+  };
+}
+
+class Data {
   String? message;
   String? accessToken;
   User? user;
 
-  LoginResponseModel({
+  Data({
     this.message,
     this.accessToken,
     this.user,
   });
 
-  factory LoginResponseModel.fromJson(Map<String, dynamic> json) => LoginResponseModel(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
     message: json["message"],
     accessToken: json["access_token"],
     user: json["user"] == null ? null : User.fromJson(json["user"]),

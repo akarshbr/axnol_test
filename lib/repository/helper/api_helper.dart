@@ -20,8 +20,8 @@ class ApiHelper {
         return data;
       } else {
         log("Else Condition -> Api failed");
-        var data = {"status": 0, "data": null};
-        return data;
+        var decodedData = jsonDecode(response.body);
+        return decodedData;
       }
     } catch (e) {
       log("$e");

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:clean_code_demo/presentation/profile_screen/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../widgets/button_widget.dart';
@@ -18,6 +21,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var phoneController = TextEditingController();
   var addressController = TextEditingController();
   var detailsController = TextEditingController();
+  File? image;
+
+  Future<void> getImage(ImageSource source) async {
+    final pickedImage = await ImagePicker().pickImage(source: source);
+    if (pickedImage != null) {
+      setState(() {
+        image = File(pickedImage.path);
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    Provider.of<ProfileController>(context, listen: false).getReceivedData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +64,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
       body: Consumer<ProfileController>(builder: (context, controller, _) {
-        firstNameController.text = controller.getData["user"]["fname"] ?? "";
-        lastNameController.text = controller.getData["user"]["lname"] ?? "";
-        phoneController.text = controller.getData["user"]["mobile"] ?? "";
-        addressController.text = controller.getData["user"]["address"] ?? "";
-        detailsController.text = controller.getData["user"]["detail"] ?? "";
+        firstNameController.text = controller.getData["data"]["user"]["fname"] ?? "";
+        lastNameController.text = controller.getData["data"]["user"]["lname"] ?? "";
+        phoneController.text = controller.getData["data"]["user"]["mobile"] ?? "";
+        addressController.text = controller.getData["data"]["user"]["address"] ?? "";
+        detailsController.text = controller.getData["data"]["user"]["detail"] ?? "";
         return controller.isLoading
             ? const Center(child: CircularProgressIndicator())
             : Padding(
@@ -63,15 +82,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Container(
                           width: 120,
                           height: 120,
-                          decoration: const BoxDecoration(color: Colors.yellow, shape: BoxShape.circle),
+                          decoration: BoxDecoration(
+                              color: Colors.yellow,
+                              shape: BoxShape.circle,
+                              image: image != null
+                                  ? DecorationImage(image: FileImage(image!), fit: BoxFit.cover)
+                                  : DecorationImage(image: AssetImage("asset/dp.png"))),
                           alignment: Alignment.bottomRight,
-                          child: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: const Color(0xffFF9900),
-                            child: Center(
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.camera_alt_outlined, color: Colors.white),
+                          child: InkWell(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Choose the Source"),
+                                      actions: [
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              getImage(ImageSource.camera);
+                                              Navigator.pop(context);
+                                            },
+                                            icon: Icon(
+                                              Icons.camera,
+                                              color: const Color(0xffFF9900),
+                                            ),
+                                            label: Text("Camera", style: TextStyle(color: Colors.black))),
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              getImage(ImageSource.gallery);
+                                              Navigator.pop(context);
+                                            },
+                                            icon: Icon(
+                                              Icons.photo,
+                                              color: const Color(0xffFF9900),
+                                            ),
+                                            label: Text("Gallery", style: TextStyle(color: Colors.black)))
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: CircleAvatar(
+                              radius: 20,
+                              backgroundColor: const Color(0xffFF9900),
+                              child: Center(
+                                child: const Icon(Icons.camera_alt_outlined, color: Colors.white),
                               ),
                             ),
                           ),
