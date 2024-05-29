@@ -4,7 +4,7 @@ class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
     super.key,
     required this.size,
-    this.passwordController,
+    this.textEditingController,
     required this.label,
     this.suffixText,
     this.maxLines = 1,
@@ -12,7 +12,7 @@ class TextFormFieldWidget extends StatelessWidget {
   });
 
   final Size size;
-  final TextEditingController? passwordController;
+  final TextEditingController? textEditingController;
   final String label;
   final String? suffixText;
   final int? maxLines;
@@ -23,7 +23,7 @@ class TextFormFieldWidget extends StatelessWidget {
     return SizedBox(
       width: size.width * .8,
       child: TextFormField(
-        controller: passwordController,
+        controller: textEditingController,
         maxLines: maxLines,
         decoration: InputDecoration(
           filled: filled,

@@ -16,7 +16,8 @@ class LoginController extends ChangeNotifier {
     var body = {"email": "$email", "password": "$passWord"};
     LoginService.onLogin(body).then((value) {
       if (value["status"] == 1) {
-        storeReceivedData(value);
+        var data = value["data"];
+        storeReceivedData(data);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
         log("$value");
       } else {
@@ -30,6 +31,6 @@ class LoginController extends ChangeNotifier {
   storeReceivedData(data) async {
     sharedPreferences = await SharedPreferences.getInstance();
     String storeData = jsonEncode(data);
-    sharedPreferences.setString("userdata", storeData);
+    sharedPreferences.setString("response", storeData);
   }
 }

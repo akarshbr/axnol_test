@@ -1,5 +1,6 @@
 import 'package:clean_code_demo/presentation/login_screen/controller/login_controller.dart';
 import 'package:clean_code_demo/presentation/login_screen/view/login_screen.dart';
+import 'package:clean_code_demo/presentation/profile_screen/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoginController()),
+        ChangeNotifierProvider(create: (context) => ProfileController()),
       ],
       child: MaterialApp(
         home: LoginScreen(),

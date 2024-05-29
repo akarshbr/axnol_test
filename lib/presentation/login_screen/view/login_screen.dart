@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: size.width * .05),
             TextFormFieldWidget(
               size: size,
-              passwordController: passwordController,
+              textEditingController: passwordController,
               label: 'Password',
               suffixText: "Forgot?",
             ),
